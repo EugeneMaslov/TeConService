@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeConService", "TeConService.csproj", "{5922DB63-4C01-46FF-A620-C7224DBF7B3C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5922DB63-4C01-46FF-A620-C7224DBF7B3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5922DB63-4C01-46FF-A620-C7224DBF7B3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5922DB63-4C01-46FF-A620-C7224DBF7B3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5922DB63-4C01-46FF-A620-C7224DBF7B3C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {12125EAA-2D6D-4B1C-8F54-242CE7C4CF48}
+	EndGlobalSection
+EndGlobal
