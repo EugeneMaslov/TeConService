@@ -19,41 +19,46 @@ namespace TeConService.Controllers
             db = context;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tests>>> Get()
+        public async Task<ActionResult<IEnumerable<Test>>> Get()
         {
-            return await db.Tests.ToListAsync();
+            return await db.Test.ToListAsync();
+        }
+        [HttpGet("{id}/Questions")]
+        public async Task<ActionResult<IEnumerable<Question>>> GetQuestion()
+        {
+            return await db.Questions.ToListAsync();
         }
         // GET api/Tests/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Tests>> Get(int id)
+        public async Task<ActionResult<Test>> Get(int id)
         {
-            Tests Test = await db.Tests.FirstOrDefaultAsync(x => x.Id == id);
+            Test Test = await db.Test.FirstOrDefaultAsync(x => x.Id == id);
             if (Test == null)
                 return NotFound();
             return new ObjectResult(Test);
         }
         // POST api/Tests
         [HttpPost]
-        public async Task<ActionResult<Tests>> Post(Tests Test)
+        public async Task<ActionResult<Test>> Post(Test Test)
         {
             if (Test == null)
             {
                 return BadRequest();
             }
 
-            db.Tests.Add(Test);
+            db.Test.Add(Test);
             await db.SaveChangesAsync();
             return Ok(Test);
         }
         // PUT api/Tests/
         [HttpPut]
-        public async Task<ActionResult<Tests>> Put(Tests Test)
+        public async Task<ActionResult<Test>> Put(Test Test)
         {
             if (Test == null)
             {
                 return BadRequest();
             }
-            if (!db.Tests.Any(x => x.Id == Test.Id))
+            if (!db.Test.Any(x => x.Id == Test.Id))
             {
                 return NotFound();
             }
@@ -64,14 +69,14 @@ namespace TeConService.Controllers
         }
         // DELETE api/Tests/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Tests>> Delete(int id)
+        public async Task<ActionResult<Test>> Delete(int id)
         {
-            Tests Test = db.Tests.FirstOrDefault(x => x.Id == id);
+            Test Test = db.Test.FirstOrDefault(x => x.Id == id);
             if (Test == null)
             {
                 return NotFound();
             }
-            db.Tests.Remove(Test);
+            db.Test.Remove(Test);
             await db.SaveChangesAsync();
             return Ok(Test);
         }
