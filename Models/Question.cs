@@ -10,11 +10,10 @@ namespace TeConService.Models
 {
     public class Question
     {
-        [Key]
         public int Id { get; set; }
-        [Required]
         public string OQuestion { get; set; }
-        public int? TestId { get; set; }
-        public Test Test { get; set; }
+        public List<Varient> Varient { get; set; }
+        public int TestId { get; set; }
+        public virtual Test Test { get; set; }
     }
 }

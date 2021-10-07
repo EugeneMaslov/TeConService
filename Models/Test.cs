@@ -12,11 +12,8 @@ namespace TeConService.Models
 {
     public class Test
     {
-        [Key]
         public int Id { get; set; }
-        [Required]
         public string Name { get; set; }
-        [Required]
-        public IEnumerable<Question> Questions { get; set; }
+        public List<Question> Questions { get; set; }
     }
 }

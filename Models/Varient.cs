@@ -10,9 +10,10 @@ namespace TeConService.Models
 {
     public class Varient
     {
-        [Key]
+        public int Id { get; set; }
         public string OVarient { get; set; }
-        [Required]
         public bool IsTrue { get; set; }
+        public int QuestionId { get; set; }
+        public virtual Question Question { get; set; }
     }
 }

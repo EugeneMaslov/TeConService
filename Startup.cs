@@ -27,9 +27,7 @@ namespace TeConService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string con = "Server=(localdb)\\mssqllocaldb;Database=testquestiondb1;Trusted_Connection=True;";
-            services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling =
-            Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            string con = "Server=(localdb)\\mssqllocaldb;Database=testsdb1;Trusted_Connection=True;";
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(con));
             services.AddControllers();
         }

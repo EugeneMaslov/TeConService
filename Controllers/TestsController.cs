@@ -21,18 +21,13 @@ namespace TeConService.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Test>>> Get()
         {
-            return await db.Test.ToListAsync();
-        }
-        [HttpGet("{id}/Questions")]
-        public async Task<ActionResult<IEnumerable<Question>>> GetQuestion()
-        {
-            return await db.Questions.ToListAsync();
+            return await db.Tests.ToListAsync();
         }
         // GET api/Tests/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Test>> Get(int id)
         {
-            Test Test = await db.Test.FirstOrDefaultAsync(x => x.Id == id);
+            Test Test = await db.Tests.FirstOrDefaultAsync(x => x.Id == id);
             if (Test == null)
                 return NotFound();
             return new ObjectResult(Test);
@@ -46,7 +41,7 @@ namespace TeConService.Controllers
                 return BadRequest();
             }
 
-            db.Test.Add(Test);
+            db.Tests.Add(Test);
             await db.SaveChangesAsync();
             return Ok(Test);
         }
@@ -58,7 +53,7 @@ namespace TeConService.Controllers
             {
                 return BadRequest();
             }
-            if (!db.Test.Any(x => x.Id == Test.Id))
+            if (!db.Tests.Any(x => x.Id == Test.Id))
             {
                 return NotFound();
             }
@@ -71,12 +66,12 @@ namespace TeConService.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Test>> Delete(int id)
         {
-            Test Test = db.Test.FirstOrDefault(x => x.Id == id);
+            Test Test = db.Tests.FirstOrDefault(x => x.Id == id);
             if (Test == null)
             {
                 return NotFound();
             }
-            db.Test.Remove(Test);
+            db.Tests.Remove(Test);
             await db.SaveChangesAsync();
             return Ok(Test);
         }

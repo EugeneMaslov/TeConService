@@ -10,8 +10,9 @@ namespace TeConService.Models
 {
     public class ApplicationContext : DbContext
     {
-        public DbSet<Test> Test { get; set; }
+        public DbSet<Test> Tests { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Varient> Varients { get; set; }
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {
@@ -19,20 +20,9 @@ namespace TeConService.Models
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(Question).Assembly);
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(IEnumerable<Question>).Assembly);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(Test).Assembly);
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(IEnumerable<Test>).Assembly);
-            modelBuilder.Entity<Test>(a =>
-            {
-                a.Property<int>("Id");
-                a.HasKey("Id");
-            });
-            modelBuilder.Entity<Question>(a =>
-            {
-                a.Property<int>("Id");
-                a.HasKey("Id");
-            });
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(Question).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(Varient).Assembly);
             base.OnModelCreating(modelBuilder);
         }
     }
