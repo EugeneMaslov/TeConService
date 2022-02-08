@@ -32,6 +32,22 @@ namespace TeConService.Controllers
                 return NotFound();
             return new ObjectResult(Varient);
         }
+        [HttpGet("{QuestionId}")]
+        public async Task<ActionResult<Question>> Get(string questId)
+        {
+            try
+            {
+                int keyCode = int.Parse(questId);
+                Varient Varient = await db.Varients.FirstOrDefaultAsync(x => x.QuestionId == keyCode);
+                if (Varient == null)
+                    return NotFound();
+                return new ObjectResult(Varient);
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
         // POST api/Varients
         [HttpPost]
         public async Task<ActionResult<Varient>> Post(Varient Varient)
