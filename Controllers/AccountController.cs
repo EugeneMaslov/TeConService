@@ -51,11 +51,6 @@ namespace TeConService.Controllers
             {
                 return BadRequest();
             }
-            User str = await db.Users.FirstOrDefaultAsync(x => x.Login == User.Login);
-            if (str.Login != null)
-            {
-                return BadRequest();
-            }
             db.Users.Add(User);
             await db.SaveChangesAsync();
             return Ok(User);
@@ -81,7 +76,7 @@ namespace TeConService.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> Delete(int id)
         {
-            User User = await db.Users.FirstOrDefaultAsync(x => x.Id == id);
+            User User = db.Users.FirstOrDefault(x => x.Id == id);
             if (User == null)
             {
                 return NotFound();

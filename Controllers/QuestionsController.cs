@@ -32,22 +32,6 @@ namespace TeConService.Controllers
                 return NotFound();
             return new ObjectResult(Question);
         }
-        [HttpGet("{testId}")]
-        public async Task<ActionResult<Question>> Get(string testId)
-        {
-            try
-            {
-                int keyCode = int.Parse(testId);
-                Question Question = await db.Questions.FirstOrDefaultAsync(x => x.TestId == keyCode);
-                if (Question == null)
-                    return NotFound();
-                return new ObjectResult(Question);
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
-        }
         // POST api/Questions
         [HttpPost]
         public async Task<ActionResult<Question>> Post(Question Question)
