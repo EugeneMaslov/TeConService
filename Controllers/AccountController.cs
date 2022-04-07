@@ -35,8 +35,8 @@ namespace TeConService.Controllers
                 return NotFound();
             return new ObjectResult(User);
         }
-        [HttpGet("{login}/{tests}")]
-        public async Task<ActionResult<Test>> GetTests(string login, int id)
+        [HttpGet("tests/{id}")]
+        public ActionResult<Test> GetTests(int id)
         {
             IQueryable<Test> Tests = db.Tests.Where(x => x.UserId == id);
             if (User == null)
