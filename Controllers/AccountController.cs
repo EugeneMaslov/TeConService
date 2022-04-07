@@ -26,15 +26,7 @@ namespace TeConService.Controllers
         {
             return await db.Users.ToListAsync();
         }
-        // GET api/Users/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> Get(int id)
-        {
-            User User = await db.Users.FirstOrDefaultAsync(x => x.Id == id);
-            if (User == null)
-                return NotFound();
-            return new ObjectResult(User);
-        }
+        // GET api/Users/login
         [HttpGet("{login}")]
         public async Task<ActionResult<User>> Get(string login)
         {
