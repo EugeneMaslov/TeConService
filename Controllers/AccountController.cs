@@ -35,6 +35,15 @@ namespace TeConService.Controllers
                 return NotFound();
             return new ObjectResult(User);
         }
+        [HttpGet("{login}")]
+        [Route("{tests: int}")]
+        public async Task<ActionResult<Test>> GetTests(string login, int id)
+        {
+            IQueryable<Test> Tests = db.Tests.Where(x => x.UserId == id);
+            if (User == null)
+                return NotFound();
+            return new ObjectResult(Tests);
+        }
         // POST api/Users
         [HttpPost]
         public async Task<ActionResult<User>> Post(User User)
