@@ -8,11 +8,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TeConService.Models;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace TeConService
 {
@@ -25,13 +27,28 @@ namespace TeConService
 
         public IConfiguration Configuration { get; }
 
+        private static string GetHerokuConnectionString()
+        {
+            string connectionUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+
+            var databaseUri = new Uri(connectionUrl);
+
+            string db = databaseUri.LocalPath.TrimStart('/');
+            string[] userInfo = databaseUri.UserInfo.Split(':', StringSplitOptions.RemoveEmptyEntries);
+
+            return $"User ID={userInfo[0]};Password={userInfo[1]};Host={databaseUri.Host};Port={databaseUri.Port};Database={db};Pooling=true;SSL Mode=Require;Trust Server Certificate=True;";
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {   
-            services.AddDbContext<ApplicationContext>(options =>
-            options.UseSqlite(
-                Configuration.GetConnectionString("DefaultConnection")));
+        {
             services.AddControllers(); // используем контроллеры без представлений
+
+            var IsDevelopment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
+
+            var connectionString = IsDevelopment ? Configuration.GetConnectionString("DefaultConnection") : GetHerokuConnectionString();
+            services.AddDbContext<ApplicationContext>(options =>
+            options.UseNpgsql(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
