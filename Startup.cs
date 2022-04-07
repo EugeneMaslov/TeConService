@@ -31,7 +31,7 @@ namespace TeConService
         public void ConfigureServices(IServiceCollection services)
         {   
             services.AddDbContext<ApplicationContext>(options =>
-            options.UseNpgsql(
+            options.UseSqlite(
                 Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers(); // используем контроллеры без представлений
         }

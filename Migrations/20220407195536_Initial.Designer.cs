@@ -8,7 +8,7 @@ using TeConService.Models;
 namespace TeConService.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20211018124627_Initial")]
+    [Migration("20220407195536_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,6 +41,9 @@ namespace TeConService.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
