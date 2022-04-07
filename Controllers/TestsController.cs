@@ -25,9 +25,9 @@ namespace TeConService.Controllers
         }
         // GET api/Tests/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Test>> Get(int id)
+        public ActionResult<Test> Get(int id)
         {
-            Test Test = await db.Tests.FirstOrDefaultAsync(x => x.Id == id);
+            IQueryable<Test> Test = db.Tests.Where(x => x.UserId == id);
             if (Test == null)
                 return NotFound();
             return new ObjectResult(Test);
