@@ -25,9 +25,9 @@ namespace TeConService.Controllers
         }
         // GET api/Varients/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Varient>> Get(int id)
+        public ActionResult<Varient> Get(int id)
         {
-            Varient Varient = await db.Varients.FirstOrDefaultAsync(x => x.Id == id);
+            IQueryable<Varient> Varient = db.Varients.Where(x => x.QuestionId == id);
             if (Varient == null)
                 return NotFound();
             return new ObjectResult(Varient);
