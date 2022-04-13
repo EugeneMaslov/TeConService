@@ -36,7 +36,7 @@ namespace TeConService.Controllers
             return new ObjectResult(User);
         }
         // GET api/Users/userid/id
-        [HttpGet("userid/{login}")]
+        [HttpGet("userid/{userId}")]
         public async Task<ActionResult<User>> GetFor(int userId)
         {
             User User = await db.Users.FirstOrDefaultAsync(x => x.Id == userId);
