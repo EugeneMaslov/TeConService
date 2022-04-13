@@ -32,6 +32,15 @@ namespace TeConService.Controllers
                 return NotFound();
             return new ObjectResult(Test);
         }
+        // GET api/Tests/code/Code
+        [HttpGet("code/{code}")]
+        public async Task<ActionResult<Test>> Getter(string code)
+        {
+            Test Test = await db.Tests.FirstOrDefaultAsync(x => x.Code == code);
+            if (Test == null)
+                return NotFound();
+            return new ObjectResult(Test);
+        }
         // POST api/Tests
         [HttpPost]
         public async Task<ActionResult<Test>> Post(Test Test)
