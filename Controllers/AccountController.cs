@@ -35,6 +35,15 @@ namespace TeConService.Controllers
                 return NotFound();
             return new ObjectResult(User);
         }
+        // GET api/Users/userid/id
+        [HttpGet("userid/{login}")]
+        public async Task<ActionResult<User>> GetFor(int userId)
+        {
+            User User = await db.Users.FirstOrDefaultAsync(x => x.Id == userId);
+            if (User == null)
+                return NotFound();
+            return new ObjectResult(User);
+        }
         // POST api/Users
         [HttpPost]
         public async Task<ActionResult<User>> Post(User User)
