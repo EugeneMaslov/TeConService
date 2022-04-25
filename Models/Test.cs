@@ -16,6 +16,7 @@ namespace TeConService.Models
         public string Code { get; set; }
         public string Name { get; set; }
         public List<Question> Questions { get; set; }
+        public List<Result> Results { get; set; }
         public int UserId { get; set; }
         public virtual User User { get; set; }
     }

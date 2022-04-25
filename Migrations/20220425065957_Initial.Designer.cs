@@ -9,7 +9,7 @@ using TeConService.Models;
 namespace TeConService.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220407204944_Initial")]
+    [Migration("20220425065957_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,29 @@ namespace TeConService.Migrations
                     b.HasIndex("TestId");
 
                     b.ToTable("Questions");
+                });
+
+            modelBuilder.Entity("TeConService.Models.Result", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Result_by")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TestId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TestId");
+
+                    b.ToTable("Results");
                 });
 
             modelBuilder.Entity("TeConService.Models.Test", b =>
@@ -118,6 +141,15 @@ namespace TeConService.Migrations
                     b.Navigation("Test");
                 });
 
+            modelBuilder.Entity("TeConService.Models.Result", b =>
+                {
+                    b.HasOne("TeConService.Models.Test", null)
+                        .WithMany("Results")
+                        .HasForeignKey("TestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("TeConService.Models.Test", b =>
                 {
                     b.HasOne("TeConService.Models.User", "User")
@@ -148,6 +180,8 @@ namespace TeConService.Migrations
             modelBuilder.Entity("TeConService.Models.Test", b =>
                 {
                     b.Navigation("Questions");
+
+                    b.Navigation("Results");
                 });
 
             modelBuilder.Entity("TeConService.Models.User", b =>

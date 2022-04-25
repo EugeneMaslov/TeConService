@@ -64,6 +64,27 @@ namespace TeConService.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Results",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Result_by = table.Column<int>(type: "integer", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    TestId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Results", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Results_Tests_TestId",
+                        column: x => x.TestId,
+                        principalTable: "Tests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Varients",
                 columns: table => new
                 {
@@ -90,6 +111,11 @@ namespace TeConService.Migrations
                 column: "TestId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Results_TestId",
+                table: "Results",
+                column: "TestId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tests_UserId",
                 table: "Tests",
                 column: "UserId");
@@ -102,6 +128,9 @@ namespace TeConService.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Results");
+
             migrationBuilder.DropTable(
                 name: "Varients");
 

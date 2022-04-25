@@ -14,6 +14,7 @@ namespace TeConService.Models
         public DbSet<Question> Questions { get; set; }
         public DbSet<Varient> Varients { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Result> Results { get; set; }
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {
@@ -25,6 +26,7 @@ namespace TeConService.Models
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(Question).Assembly);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(Varient).Assembly);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(User).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(Result).Assembly);
             base.OnModelCreating(modelBuilder);
         }
     }
