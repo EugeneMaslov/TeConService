@@ -9,7 +9,7 @@ using TeConService.Models;
 namespace TeConService.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220425065957_Initial")]
+    [Migration("20220425090328_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
